@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.cognitoforms.com/schemas/form-reference.json",
+  "title": "FormReference",
+  "description": "A form reference that includes the name and ID of the form",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "description": "The unique ID of the form",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the form",
+      "type": "string"
+    }
+  }
+}

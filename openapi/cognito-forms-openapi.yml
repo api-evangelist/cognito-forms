@@ -1,0 +1,927 @@
+openapi: 3.0.3
+info:
+  title: Cognito Forms
+  version: '1.1'
+  description: >-
+    Cognito Forms is an online form builder for collecting and managing submission data.
+    This API enables automated flows to trigger when entries are created, updated, or deleted
+    and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with
+    other services to route data, process uploaded files, and automate business workflows.
+  contact:
+    name: Cognito Forms Support
+    email: support@cognitoforms.com
+    url: https://www.cognitoforms.com/support
+servers:
+  - url: https://cognitoforms.com
+    description: Cognito Forms API Server
+
+security:
+  - oauth2Auth:
+      - admin
+
+paths:
+  /api/forms:
+    get:
+      tags:
+        - Forms
+      summary: Get Forms
+      description: >-
+        Retrieves a list of forms in your organization that are accessible by
+        the specified API key. Archived forms are not included in the response.
+      operationId: GetForms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FormReference'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/forms/{form}/schema:
+    get:
+      tags:
+        - Forms
+      summary: Get form schema
+      description: Gets the Swagger schema for a specific form.
+      operationId: GetFormSchema
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form.
+          required: true
+          schema:
+            type: string
+        - name: input
+          in: query
+          description: Return input schema
+          required: false
+          schema:
+            type: boolean
+        - name: includeLinks
+          in: query
+          description: Include Links
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/forms/{form}/entries:
+    post:
+      tags:
+        - Entries
+      summary: Create entry
+      description: Creates a new entry.
+      operationId: CreateEntry
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The entry to create for the form
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/forms/{form}/entries/{entryId}:
+    get:
+      tags:
+        - Entries
+      summary: Get entry
+      description: Gets an entry.
+      operationId: GetEntry
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+        - name: entryId
+          in: path
+          description: The entry id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    patch:
+      tags:
+        - Entries
+      summary: Update entry
+      description: Updates an entry.
+      operationId: EditEntry
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+        - name: entryId
+          in: path
+          description: The entry id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The updated entry data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    delete:
+      tags:
+        - Entries
+      summary: Delete entry
+      description: Delete an entry.
+      operationId: DeleteEntry
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+        - name: entryId
+          in: path
+          description: The entry id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/forms/{form}/entries/{entry}/documents/{templateNumber}:
+    get:
+      tags:
+        - Entries
+      summary: Get Document
+      description: Gets a document generated from a form entry.
+      operationId: GetDocument
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+        - name: entry
+          in: path
+          description: The entry id
+          required: true
+          schema:
+            type: string
+        - name: templateNumber
+          in: path
+          description: The template number
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/FileDataRef'
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+              schema:
+                $ref: '#/components/schemas/FileDataRef'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/forms/{form}/public-link-availability:
+    post:
+      tags:
+        - Forms
+      summary: Set form availability
+      description: Sets the availability of a form.
+      operationId: SetFormAvailability
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Availability settings
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormAvailabilityInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormAvailability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/forms/{form}/import-entries:
+    post:
+      tags:
+        - Entries
+      summary: Import Entries
+      description: Creates, updates, or deletes entries using provided file content.
+      operationId: ImportEntries
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - File
+                - ImportMode
+              properties:
+                File:
+                  type: string
+                  format: binary
+                  description: The file (.xlsx or .csv) containing the entries to import.
+                ImportMode:
+                  type: string
+                  description: The mode for the import
+                  enum:
+                    - CreateNew
+                    - UpdateExisting
+                    - SyncEntries
+                Email:
+                  type: string
+                  format: email
+                  description: The email address to receive import notifications
+                MatchEntriesUsing:
+                  type: string
+                  description: An entry ID substitute field for matching
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/forms/{form}/import-status/{importId}:
+    get:
+      tags:
+        - Entries
+      summary: Get Import Status
+      description: Gets the current status of an import and returns the number of successful and unsuccessful entries.
+      operationId: GetImportStatus
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+        - name: importId
+          in: path
+          description: The Import ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportStatus'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/files/{id}:
+    get:
+      tags:
+        - Files
+      summary: Get File
+      description: Gets a file by id.
+      operationId: GetFile
+      parameters:
+        - name: id
+          in: path
+          description: The unique identifier of the file
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/FileDataRef'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/files:
+    post:
+      tags:
+        - Files
+      summary: Upload File
+      description: Uploads a file to be used in form entries.
+      operationId: UploadFile
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - File
+              properties:
+                File:
+                  type: string
+                  format: binary
+                  description: The file to upload.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/odata/Forms({form})/Views({viewId})/Entries:
+    get:
+      tags:
+        - OData
+      summary: Get Form Entries
+      description: Get all of the entries for a specified view using OData.
+      operationId: GetEntryViewEntries
+      parameters:
+        - name: form
+          in: path
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+        - name: viewId
+          in: path
+          description: The ID of the view
+          required: true
+          schema:
+            type: string
+        - name: $count
+          in: query
+          description: Include total count of entries
+          required: false
+          schema:
+            type: string
+        - name: $select
+          in: query
+          description: Returns list of entry IDs in a View when $select=Id is specified
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /integration/oauth/subscribenewentry:
+    post:
+      tags:
+        - Webhooks
+      summary: When a new entry is created
+      description: Triggers when someone creates a new entry. Register a webhook callback URL.
+      operationId: NewEntry
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            default: forms
+        - name: publisher
+          in: query
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSubscription'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /integration/oauth/subscribeupdateentry:
+    post:
+      tags:
+        - Webhooks
+      summary: When an entry is updated
+      description: Triggers when someone updates an entry. Register a webhook callback URL.
+      operationId: UpdateEntry
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            default: forms
+        - name: publisher
+          in: query
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSubscription'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /integration/oauth/subscribeentrydeleted:
+    post:
+      tags:
+        - Webhooks
+      summary: When an entry is deleted
+      description: Triggers when someone deletes an entry. Register a webhook callback URL.
+      operationId: EntryDeleted
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            default: forms
+        - name: publisher
+          in: query
+          description: The name of the form
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSubscription'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /integration/oauth/unsubscribe:
+    delete:
+      tags:
+        - Webhooks
+      summary: Unsubscribe Webhook
+      description: Unsubscribes a webhook.
+      operationId: UnsubscribeWebhook
+      parameters:
+        - name: id
+          in: query
+          description: The unique subscription id.
+          schema:
+            type: string
+        - name: module
+          in: query
+          description: The module the subscription is associated with.
+          schema:
+            type: string
+            default: forms
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  schemas:
+    FormReference:
+      description: A form reference that includes the name and ID of the form
+      type: object
+      properties:
+        Id:
+          description: The unique ID of the form
+          type: string
+        Name:
+          description: The name of the form
+          type: string
+
+    FormAvailabilityInput:
+      description: Input for setting form availability
+      type: object
+      properties:
+        start:
+          description: Availability start date
+          type: string
+          format: date-time
+        end:
+          description: Availability end date
+          type: string
+          format: date-time
+        message:
+          description: Not Available Message
+          type: string
+
+    FormAvailability:
+      description: Form availability information such as start/end availability and not available message.
+      type: object
+      properties:
+        availabilityStart:
+          description: Form availability start
+          type: string
+          format: date-time
+        availabilityEnd:
+          description: Form availability end
+          type: string
+          format: date-time
+        notAvailableMessage:
+          description: Not available message
+          type: string
+
+    FileDataRef:
+      description: A file reference that includes file data and metadata
+      type: object
+      properties:
+        Id:
+          description: The unique id of the file.
+          type: string
+        Name:
+          description: The name of the file
+          type: string
+        ContentType:
+          description: The content type of the file.
+          type: string
+        Size:
+          description: The size of the file.
+          type: integer
+        File:
+          description: The URL of the file.
+          type: string
+        Content:
+          description: The file content
+          type: string
+          format: byte
+
+    FileUploadResult:
+      description: Result of a file upload
+      type: object
+      properties:
+        Id:
+          description: The unique id of the file.
+          type: string
+        Name:
+          description: The name of the file
+          type: string
+        ContentType:
+          description: The content type of the file.
+          type: string
+        Size:
+          description: The size of the file in bytes.
+          type: integer
+
+    ImportResult:
+      description: The result of an import request
+      type: object
+      properties:
+        Id:
+          description: The ID of the import
+          type: string
+        Status:
+          description: The status of the import
+          type: string
+        ErrorMessage:
+          description: A message describing why the import failed
+          type: string
+
+    ImportStatus:
+      description: The status of an import
+      type: object
+      properties:
+        Id:
+          description: The ID of the import
+          type: string
+        Status:
+          description: The status of the import
+          type: string
+        ErrorMessage:
+          description: A message describing why the import failed
+          type: string
+        SuccessfulEntries:
+          description: The number of entries successfully imported
+          type: integer
+        UnsuccessfulEntries:
+          description: The number of entries that failed to import
+          type: integer
+        TotalEntries:
+          description: The total number of entries in the import
+          type: integer
+        ImportLink:
+          description: The link to the entries page to download the annotated file
+          type: string
+
+    WebhookSubscription:
+      description: Webhook subscription payload with callback URL
+      type: object
+      required:
+        - notificationUrl
+      properties:
+        notificationUrl:
+          description: The URL to call back to.
+          type: string
+
+    Error:
+      description: An error
+      type: object
+      properties:
+        Message:
+          description: A message describing the error
+          type: string
+        Type:
+          description: The type of the error
+          type: string
+        SupportCode:
+          description: A support code identifying the specific error
+          type: string
+        Data:
+          description: Data related to the error
+          type: object
+
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  securitySchemes:
+    oauth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://cognitoforms.com/api-connection
+          tokenUrl: https://cognitoforms.com/admin/oauthtoken
+          scopes:
+            admin: Full administrative access

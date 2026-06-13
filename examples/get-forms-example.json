@@ -1,0 +1,27 @@
+{
+  "description": "Example: Retrieve a list of all accessible forms via GET /api/forms",
+  "request": {
+    "method": "GET",
+    "url": "https://cognitoforms.com/api/forms",
+    "headers": {
+      "Authorization": "Bearer {api_key}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "Id": "1",
+        "Name": "Contact Us"
+      },
+      {
+        "Id": "2",
+        "Name": "Event Registration"
+      },
+      {
+        "Id": "3",
+        "Name": "Job Application"
+      }
+    ]
+  }
+}

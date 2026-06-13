@@ -1,0 +1,23 @@
+{
+  "description": "Example: Import entries from a CSV or XLSX file via POST /api/forms/{form}/import-entries",
+  "request": {
+    "method": "POST",
+    "url": "https://cognitoforms.com/api/forms/1/import-entries",
+    "headers": {
+      "Authorization": "Bearer {api_key}",
+      "Content-Type": "multipart/form-data"
+    },
+    "body": {
+      "File": "(binary CSV or XLSX file content)",
+      "ImportMode": "CreateNew",
+      "Email": "admin@example.com"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "Id": "abc123def456",
+      "Status": "Processing"
+    }
+  }
+}

@@ -38,6 +38,8 @@ apis:
         url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
       - type: APIReference
         url: https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
+      - type: OpenAPI
+        url: openapi/cognito-forms-openapi.yml
     contact:
       - FN: Cognito Forms Support
         url: https://www.cognitoforms.com/support

@@ -1,0 +1,129 @@
+name: Cognito Forms Vocabulary
+description: Domain vocabulary for the Cognito Forms REST API covering forms, entries, documents, files, and OData integration.
+url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
+version: '1.1'
+terms:
+  - term: Form
+    definition: >-
+      An online data-collection instrument built in Cognito Forms consisting of fields,
+      sections, and workflow logic. Forms are identified by a unique ID and Name.
+    relatedTerms:
+      - FormReference
+      - FormSchema
+      - FormAvailability
+
+  - term: FormReference
+    definition: >-
+      A lightweight object containing only the Id and Name of a form, returned when
+      listing all forms accessible to an API key.
+    relatedTerms:
+      - Form
+
+  - term: FormSchema
+    definition: >-
+      A Swagger/JSON Schema document describing the fields and data types for a specific
+      form, used to dynamically validate and construct entry payloads.
+    relatedTerms:
+      - Form
+      - Entry
+
+  - term: FormAvailability
+    definition: >-
+      Configuration specifying the start and end datetime window during which a form
+      accepts submissions, along with an optional message shown when the form is unavailable.
+    relatedTerms:
+      - Form
+
+  - term: Entry
+    definition: >-
+      A single submission of data to a form. Entries have a system-assigned numeric ID,
+      creation and modification timestamps, and field values that conform to the form's schema.
+    relatedTerms:
+      - Form
+      - Document
+      - ImportEntries
+
+  - term: Document
+    definition: >-
+      A PDF or Word document generated from a form entry using a document template configured
+      within the form. Identified by a template number.
+    relatedTerms:
+      - Entry
+
+  - term: File
+    definition: >-
+      A binary asset (image, PDF, spreadsheet, etc.) that can be uploaded independently
+      and referenced within form entries via its unique file ID.
+    relatedTerms:
+      - FileDataRef
+      - Entry
+
+  - term: FileDataRef
+    definition: >-
+      An object containing metadata about a file — Id, Name, ContentType, Size, a URL (File),
+      and optionally the base64-encoded content (Content).
+    relatedTerms:
+      - File
+
+  - term: ImportEntries
+    definition: >-
+      A bulk operation that creates, updates, or deletes form entries by processing an
+      uploaded CSV or XLSX file. Supports three modes: CreateNew, UpdateExisting, SyncEntries.
+    relatedTerms:
+      - Entry
+      - ImportStatus
+      - ImportMode
+
+  - term: ImportMode
+    definition: >-
+      An enumeration controlling how imported rows are applied to existing entries.
+      CreateNew adds all rows as new entries. UpdateExisting matches and patches existing entries.
+      SyncEntries creates, updates, and deletes to achieve full synchronization.
+    relatedTerms:
+      - ImportEntries
+
+  - term: ImportStatus
+    definition: >-
+      The result object of an import operation, including a status string, counts of
+      successful and unsuccessful entries, and a download link for the annotated result file.
+    relatedTerms:
+      - ImportEntries
+
+  - term: OData
+    definition: >-
+      An open protocol used by Cognito Forms to expose form entries for analytics tools
+      such as Power BI, Tableau, and Excel. Accessed via /api/odata endpoints with standard
+      OData query parameters like $select and $count.
+    relatedTerms:
+      - Entry
+      - View
+
+  - term: View
+    definition: >-
+      A saved filter and column configuration within Cognito Forms. OData entry queries
+      are scoped to a specific View identified by viewId.
+    relatedTerms:
+      - OData
+      - Entry
+
+  - term: Webhook
+    definition: >-
+      An HTTP callback registered via the integration endpoints that fires when an entry
+      is created, updated, or deleted. Identified by a subscription ID and managed through
+      subscribe and unsubscribe endpoints.
+    relatedTerms:
+      - Entry
+
+  - term: APIKey
+    definition: >-
+      A bearer token used for authentication with the Cognito Forms REST API. Scoped to
+      a specific Cognito Forms organization and controls which forms and operations are accessible.
+    relatedTerms:
+      - OAuth2
+
+  - term: OAuth2
+    definition: >-
+      The authorization protocol used by Cognito Forms for third-party connector integrations
+      (e.g., Power Automate). Uses the authorization code flow with a custom admin scope.
+    relatedTerms:
+      - APIKey

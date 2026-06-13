@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.cognitoforms.com/schemas/form-availability.json",
+  "title": "FormAvailability",
+  "description": "Form availability information including start/end dates and not-available message.",
+  "type": "object",
+  "properties": {
+    "availabilityStart": {
+      "description": "Form availability start date-time",
+      "type": "string",
+      "format": "date-time"
+    },
+    "availabilityEnd": {
+      "description": "Form availability end date-time",
+      "type": "string",
+      "format": "date-time"
+    },
+    "notAvailableMessage": {
+      "description": "Message displayed when form is not available",
+      "type": "string"
+    }
+  }
+}

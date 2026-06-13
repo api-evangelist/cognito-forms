@@ -1,0 +1,35 @@
+{
+  "description": "Example: Create a new form entry via POST /api/forms/{form}/entries",
+  "request": {
+    "method": "POST",
+    "url": "https://cognitoforms.com/api/forms/1/entries",
+    "headers": {
+      "Authorization": "Bearer {api_key}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "Name": {
+        "First": "Jane",
+        "Last": "Smith"
+      },
+      "Email": "jane.smith@example.com",
+      "Phone": "555-867-5309",
+      "Message": "I would like more information about your services."
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "Entry": 42,
+      "DateCreated": "2026-06-13T10:00:00Z",
+      "DateUpdated": "2026-06-13T10:00:00Z",
+      "Name": {
+        "First": "Jane",
+        "Last": "Smith"
+      },
+      "Email": "jane.smith@example.com",
+      "Phone": "555-867-5309",
+      "Message": "I would like more information about your services."
+    }
+  }
+}

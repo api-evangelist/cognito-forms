@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.cognitoforms.com/schemas/error.json",
+  "title": "Error",
+  "description": "An error response from the Cognito Forms API",
+  "type": "object",
+  "properties": {
+    "Message": {
+      "description": "A message describing the error",
+      "type": "string"
+    },
+    "Type": {
+      "description": "The type of the error",
+      "type": "string"
+    },
+    "SupportCode": {
+      "description": "A support code identifying the specific error",
+      "type": "string"
+    },
+    "Data": {
+      "description": "Data related to the error",
+      "type": "object"
+    }
+  }
+}

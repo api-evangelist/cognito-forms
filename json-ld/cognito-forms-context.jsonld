@@ -1,0 +1,112 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "cf": "https://www.cognitoforms.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Form": "cf:Form",
+    "FormReference": "cf:FormReference",
+    "FormSchema": "cf:FormSchema",
+    "FormAvailability": "cf:FormAvailability",
+    "Entry": "cf:Entry",
+    "Document": "cf:Document",
+    "File": "cf:File",
+    "FileDataRef": "cf:FileDataRef",
+    "ImportStatus": "cf:ImportStatus",
+    "View": "cf:View",
+    "Webhook": "cf:Webhook",
+
+    "Id": {
+      "@id": "cf:id",
+      "@type": "xsd:string"
+    },
+    "Name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "Email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "DateCreated": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "DateUpdated": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "availabilityStart": {
+      "@id": "schema:availabilityStarts",
+      "@type": "xsd:dateTime"
+    },
+    "availabilityEnd": {
+      "@id": "schema:availabilityEnds",
+      "@type": "xsd:dateTime"
+    },
+    "notAvailableMessage": {
+      "@id": "cf:notAvailableMessage",
+      "@type": "xsd:string"
+    },
+    "ContentType": {
+      "@id": "schema:encodingFormat",
+      "@type": "xsd:string"
+    },
+    "Size": {
+      "@id": "schema:contentSize",
+      "@type": "xsd:integer"
+    },
+    "Content": {
+      "@id": "cf:fileContent",
+      "@type": "xsd:base64Binary"
+    },
+    "Status": {
+      "@id": "cf:importStatus",
+      "@type": "xsd:string"
+    },
+    "ErrorMessage": {
+      "@id": "cf:errorMessage",
+      "@type": "xsd:string"
+    },
+    "Message": {
+      "@id": "cf:errorMessage",
+      "@type": "xsd:string"
+    },
+    "Type": {
+      "@id": "cf:errorType",
+      "@type": "xsd:string"
+    },
+    "SupportCode": {
+      "@id": "cf:supportCode",
+      "@type": "xsd:string"
+    },
+    "SuccessfulEntries": {
+      "@id": "cf:successfulEntries",
+      "@type": "xsd:integer"
+    },
+    "UnsuccessfulEntries": {
+      "@id": "cf:unsuccessfulEntries",
+      "@type": "xsd:integer"
+    },
+    "TotalEntries": {
+      "@id": "cf:totalEntries",
+      "@type": "xsd:integer"
+    },
+    "ImportLink": {
+      "@id": "cf:importLink",
+      "@type": "@id"
+    },
+    "notificationUrl": {
+      "@id": "cf:notificationUrl",
+      "@type": "@id"
+    },
+    "ImportMode": {
+      "@id": "cf:importMode",
+      "@type": "xsd:string"
+    },
+    "templateNumber": {
+      "@id": "cf:templateNumber",
+      "@type": "xsd:integer"
+    }
+  }
+}

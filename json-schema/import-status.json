@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.cognitoforms.com/schemas/import-status.json",
+  "title": "ImportStatus",
+  "description": "The current status of a bulk entry import operation",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "description": "The ID of the import",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the import",
+      "type": "string"
+    },
+    "ErrorMessage": {
+      "description": "A message describing why the import failed",
+      "type": "string"
+    },
+    "SuccessfulEntries": {
+      "description": "The number of entries successfully imported",
+      "type": "integer"
+    },
+    "UnsuccessfulEntries": {
+      "description": "The number of entries that failed to import",
+      "type": "integer"
+    },
+    "TotalEntries": {
+      "description": "The total number of entries in the import",
+      "type": "integer"
+    },
+    "ImportLink": {
+      "description": "The link to the entries page to download the annotated file",
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

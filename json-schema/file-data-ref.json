@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.cognitoforms.com/schemas/file-data-ref.json",
+  "title": "FileDataRef",
+  "description": "A file reference that includes file data and metadata",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "description": "The unique id of the file",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the file",
+      "type": "string"
+    },
+    "ContentType": {
+      "description": "The content type of the file",
+      "type": "string"
+    },
+    "Size": {
+      "description": "The size of the file in bytes",
+      "type": "integer"
+    },
+    "File": {
+      "description": "The URL of the file",
+      "type": "string",
+      "format": "uri"
+    },
+    "Content": {
+      "description": "The file content as base64 encoded bytes",
+      "type": "string",
+      "contentEncoding": "base64"
+    }
+  }
+}
