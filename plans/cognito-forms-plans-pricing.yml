@@ -1,0 +1,85 @@
+name: Cognito Forms Plans and Pricing
+description: Pricing plans for Cognito Forms, an online form builder offering free
+  and paid tiers with varying entry limits, storage, user seats, and API access.
+  API access (REST API key generation) is available on Pro, Team, and Enterprise plans.
+version: '0.1'
+url: https://www.cognitoforms.com/pricing
+plans:
+  - name: Individual
+    description: Free plan for individual users with basic form building and limited
+      monthly entries and storage. No API access or guest access included.
+    price: 0.00
+    currency: USD
+    period: monthly
+    features:
+      - Unlimited forms
+      - 100 monthly entries
+      - 100 MB storage
+      - 1 user
+      - Payment acceptance
+    limitations:
+      - No API access
+      - No guest access
+      - 100 entries/month cap
+      - 100 MB storage cap
+  - name: Pro
+    description: Entry-level paid plan with API access, higher entry and storage limits,
+      and support for 2 users.
+    price: 19.00
+    currency: USD
+    period: monthly
+    annualDiscount: Up to 20% discount when paid annually
+    features:
+      - Unlimited forms
+      - 2,000 monthly entries
+      - 1 GB storage
+      - 2 users
+      - API access (REST API key generation)
+      - Payment acceptance
+      - 2,000 API requests/month included
+    limitations:
+      - No guest access
+      - 2,000 API requests/month (overage charged at $20 per 100,000 requests)
+  - name: Team
+    description: Mid-tier plan for teams with expanded entry limits, storage, guest
+      access, and additional user seats.
+    price: 39.00
+    currency: USD
+    period: monthly
+    annualDiscount: Up to 20% discount when paid annually
+    features:
+      - Unlimited forms
+      - 10,000 monthly entries
+      - 10 GB storage
+      - 5 users
+      - 5 guest users
+      - API access (REST API key generation)
+      - Payment acceptance (Square and PayPal)
+      - 10,000 API requests/month included
+    limitations:
+      - 10,000 API requests/month (overage charged at $20 per 100,000 requests)
+  - name: Enterprise
+    description: High-capacity plan for organizations requiring unlimited entries,
+      large storage, up to 20 users with guest access, and maximum API request allowances.
+    price: 129.00
+    currency: USD
+    period: monthly
+    annualDiscount: Up to 20% discount when paid annually
+    features:
+      - Unlimited forms
+      - Unlimited monthly entries
+      - 100 GB storage
+      - 20 users
+      - 20 guest users
+      - API access (REST API key generation)
+      - Payment acceptance
+      - 100,000 API requests/month included
+    limitations:
+      - 100,000 API requests/month (overage charged at $20 per 100,000 requests)
+additionalInfo:
+  - 14-day free trial available for paid plans with no credit card required
+  - Additional users available at $5/user/month on applicable plans
+  - Nonprofit discounts available for 501(c)(3) organizations
+  - API request counts include Make, Power Automate, Zapier, JSON Webhooks, and
+    Cognito Forms API calls
+  - Large requests over 100 KB count as multiple requests (e.g., 150 KB = 2 requests)

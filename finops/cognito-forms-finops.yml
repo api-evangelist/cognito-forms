@@ -1,0 +1,106 @@
+name: Cognito Forms FinOps Framework
+description: FinOps Framework 1.0 FOCUS-aligned cost and usage data for Cognito Forms
+  API consumption. Covers subscription plan costs, API request overage billing, and
+  storage cost considerations for organizations integrating Cognito Forms via its
+  REST API.
+version: '1.0'
+framework: FinOps Framework FOCUS 1.0
+provider: Cognito Forms
+url: https://www.cognitoforms.com/pricing
+billingModel:
+  type: Subscription + Overage
+  description: Cognito Forms charges a flat monthly (or annual) subscription fee
+    per plan tier. API request consumption beyond the included monthly quota incurs
+    overage charges billed at a flat rate per bucket of 100,000 requests.
+  billingCycle: monthly
+  annualOption:
+    available: true
+    discount: Up to 20%
+costComponents:
+  - name: Base Subscription
+    description: Fixed monthly cost for the selected plan tier, covering included
+      users, entries, storage, and API request quota.
+    type: Fixed
+    plans:
+      - plan: Individual
+        cost: 0.00
+        currency: USD
+        period: monthly
+      - plan: Pro
+        cost: 19.00
+        currency: USD
+        period: monthly
+      - plan: Team
+        cost: 39.00
+        currency: USD
+        period: monthly
+      - plan: Enterprise
+        cost: 129.00
+        currency: USD
+        period: monthly
+  - name: Additional Users
+    description: Per-user fee for adding users beyond the plan's included seats on
+      applicable plans.
+    type: Variable
+    cost: 5.00
+    currency: USD
+    unit: per user per month
+  - name: API Request Overage
+    description: Charged when monthly API requests (across all integration types)
+      exceed the plan's included quota. Applies to Make, Power Automate, Zapier,
+      JSON Webhooks, and the Cognito Forms REST API combined.
+    type: Overage
+    cost: 20.00
+    currency: USD
+    unit: per 100,000 requests
+    notes: Requests larger than 100 KB count as multiple requests proportionally
+      (e.g., 150 KB = 2 requests, 400 KB = 4 requests).
+usageMetrics:
+  - name: Monthly API Requests
+    description: Total number of API requests consumed across all integration types
+      during the billing month. Primary driver of overage costs.
+    includedByPlan:
+      Individual: 0
+      Pro: 2000
+      Team: 10000
+      Enterprise: 100000
+    overageRate: 20.00 USD per 100,000 requests
+  - name: Monthly Form Entries
+    description: Number of form entries submitted per month. Unlimited on Enterprise;
+      capped on lower tiers.
+    includedByPlan:
+      Individual: 100
+      Pro: 2000
+      Team: 10000
+      Enterprise: unlimited
+  - name: Storage
+    description: Total data storage for form entries, documents, and attachments.
+    includedByPlan:
+      Individual: 100 MB
+      Pro: 1 GB
+      Team: 10 GB
+      Enterprise: 100 GB
+optimization:
+  - name: Annual Billing
+    description: Switch to annual billing for up to 20% cost reduction on any paid
+      plan.
+  - name: Monitor Integration Request Pool
+    description: The monthly request quota is shared across all integration types.
+      Audit Zapier, Make, Power Automate, and Webhook usage together with API usage
+      to avoid unexpected overages.
+  - name: Payload Size Management
+    description: Keep API request payloads under 100 KB to avoid requests being
+      counted as multiple against the quota.
+  - name: Nonprofit Discount
+    description: 501(c)(3) organizations are eligible for discounted plan rates.
+      Contact Cognito Forms support for eligibility and enrollment.
+  - name: Right-Size Plan
+    description: Track actual monthly API request, entry, and storage usage versus
+      plan limits. Downgrade or upgrade based on actual consumption patterns rather
+      than peak estimates.
+tags:
+  - Forms
+  - SaaS
+  - API
+  - Subscription
+  - Overage Billing

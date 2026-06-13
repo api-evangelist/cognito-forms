@@ -1,0 +1,69 @@
+name: Cognito Forms
+description: Cognito Forms is an online form builder with a REST API for managing
+  forms, retrieving entries, updating submissions, and integrating form data into
+  business applications. The API uses API key bearer token authentication and supports
+  operations for forms, entries, and documents, with OData support for analytics
+  tool integration.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/cognito-forms/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+aid: cognito-forms
+type: Index
+tags:
+  - Forms
+  - Form Builder
+  - Form Entries
+  - Workflow Automation
+  - Data Collection
+  - OData
+apis:
+  - name: Cognito Forms REST API
+    description: REST API for secure access to forms, entries, and documents within
+      Cognito Forms. Supports creating, reading, updating, and deleting form entries,
+      managing form availability, and retrieving form schemas. Also provides an OData
+      service for syncing entry data with analytics tools like Power BI, Tableau,
+      and Excel.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
+    baseURL: https://www.cognitoforms.com/api
+    tags:
+      - Forms
+      - Entries
+      - Documents
+      - OData
+    properties:
+      - type: Documentation
+        url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
+      - type: APIReference
+        url: https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
+    contact:
+      - FN: Cognito Forms Support
+        url: https://www.cognitoforms.com/support
+common:
+  - type: Website
+    url: https://www.cognitoforms.com
+  - type: Documentation
+    url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
+  - type: GitHubOrg
+    url: https://github.com/cognitoforms
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/cognito-forms
+  - type: Blog
+    url: https://www.cognitoforms.com/blog
+  - type: Pricing
+    url: https://www.cognitoforms.com/pricing
+  - type: StatusPage
+    url: https://x.com/CognitoStatus
+  - type: X
+    url: https://twitter.com/cognitoforms
+  - type: Plans
+    url: plans/cognito-forms-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/cognito-forms-rate-limits.yml
+  - type: FinOps
+    url: finops/cognito-forms-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

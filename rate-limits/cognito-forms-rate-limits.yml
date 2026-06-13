@@ -1,0 +1,64 @@
+name: Cognito Forms API Rate Limits
+description: Rate limiting details for the Cognito Forms REST API. Limits are enforced
+  on a monthly basis tied to the subscription plan. There are no documented per-minute
+  or per-hour throttle limits; the primary constraint is monthly request quotas.
+  Large requests (over 100 KB) count as multiple requests against the monthly quota.
+version: '0.1'
+url: https://www.cognitoforms.com/support/383/faq/does-cognito-forms-limit-inbound-api-calls
+rateLimits:
+  - name: Pro Plan Monthly Request Quota
+    description: Monthly API request limit for Pro plan subscribers. Includes all
+      integration requests (Make, Power Automate, Zapier, JSON Webhooks, REST API).
+    plan: Pro
+    limit: 2000
+    period: monthly
+    unit: requests
+    overage:
+      enabled: true
+      rate: 20.00
+      currency: USD
+      unit: per 100,000 requests
+  - name: Team Plan Monthly Request Quota
+    description: Monthly API request limit for Team plan subscribers. Includes all
+      integration requests (Make, Power Automate, Zapier, JSON Webhooks, REST API).
+    plan: Team
+    limit: 10000
+    period: monthly
+    unit: requests
+    overage:
+      enabled: true
+      rate: 20.00
+      currency: USD
+      unit: per 100,000 requests
+  - name: Enterprise Plan Monthly Request Quota
+    description: Monthly API request limit for Enterprise plan subscribers. Includes
+      all integration requests (Make, Power Automate, Zapier, JSON Webhooks, REST API).
+    plan: Enterprise
+    limit: 100000
+    period: monthly
+    unit: requests
+    overage:
+      enabled: true
+      rate: 20.00
+      currency: USD
+      unit: per 100,000 requests
+policies:
+  - name: Large Request Counting
+    description: Requests exceeding 100 KB in size are counted as multiple requests.
+      A 150 KB request counts as 2 requests; a 400 KB request counts as 4 requests.
+  - name: API Key Limits
+    description: Up to five API keys per integration can be generated. Keys can be
+      configured with specific expiration dates or set to never expire.
+  - name: Shared Request Pool
+    description: Monthly request limits are shared across all integration types including
+      Make, Power Automate, Zapier, JSON Webhooks, and the Cognito Forms REST API.
+  - name: No Per-Minute Throttling Documented
+    description: Cognito Forms does not publish per-minute or per-hour rate limit
+      thresholds. Throttling is enforced at the monthly quota level.
+authentication:
+  type: Bearer Token
+  method: API Key
+  header: Authorization
+  alternativeParam: access_token
+  notes: API keys are generated in organization settings. Up to five keys per integration.
+    Keys cannot be retrieved after initial generation and must be stored immediately.
