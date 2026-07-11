@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cognito-forms-openapi.yml
+schemes:
+- name: oauth2Auth
+  source: openapi/cognito-forms-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://cognitoforms.com/api-connection
+    tokenUrl: https://cognitoforms.com/admin/oauthtoken
+scopes:
+- scope: admin
+  description: Full administrative access
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cognito-forms-openapi.yml

@@ -44,6 +44,8 @@ apis:
       - FN: Cognito Forms Support
         url: https://www.cognitoforms.com/support
 common:
+  - type: OAuthScopes
+    url: scopes/cognito-forms-scopes.yml
   - type: Website
     url: https://www.cognitoforms.com
   - type: Documentation
