@@ -44,6 +44,10 @@ apis:
       - FN: Cognito Forms Support
         url: https://www.cognitoforms.com/support
 common:
+  - type: DomainSecurity
+    url: security/cognito-forms-domain-security.yml
+  - type: Authentication
+    url: authentication/cognito-forms-authentication.yml
   - type: OAuthScopes
     url: scopes/cognito-forms-scopes.yml
   - type: Website
