@@ -44,6 +44,8 @@ apis:
       - FN: Cognito Forms Support
         url: https://www.cognitoforms.com/support
 common:
+  - type: AgenticAccess
+    url: agentic-access/cognito-forms-agentic-access.yml
   - type: DomainSecurity
     url: security/cognito-forms-domain-security.yml
   - type: Authentication
