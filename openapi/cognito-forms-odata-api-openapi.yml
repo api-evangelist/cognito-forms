@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+  title: Cognito Forms Entries OData API
+  version: '1.1'
+  description: Cognito Forms is an online form builder for collecting and managing submission data. This API enables automated flows to trigger when entries are created, updated, or deleted and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with other services to route data, process uploaded files, and automate business workflows.
+  contact:
+    name: Cognito Forms Support
+    email: support@cognitoforms.com
+    url: https://www.cognitoforms.com/support
+servers:
+- url: https://cognitoforms.com
+  description: Cognito Forms API Server
+security:
+- oauth2Auth:
+  - admin
+tags:
+- name: OData
+paths:
+  /api/odata/Forms({form})/Views({viewId})/Entries:
+    get:
+      tags:
+      - OData
+      summary: Get Form Entries
+      description: Get all of the entries for a specified view using OData.
+      operationId: GetEntryViewEntries
+      parameters:
+      - name: form
+        in: path
+        description: The name of the form
+        required: true
+        schema:
+          type: string
+      - name: viewId
+        in: path
+        description: The ID of the view
+        required: true
+        schema:
+          type: string
+      - name: $count
+        in: query
+        description: Include total count of entries
+        required: false
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: Returns list of entry IDs in a View when $select=Id is specified
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      description: An error
+      type: object
+      properties:
+        Message:
+          description: A message describing the error
+          type: string
+        Type:
+          description: The type of the error
+          type: string
+        SupportCode:
+          description: A support code identifying the specific error
+          type: string
+        Data:
+          description: Data related to the error
+          type: object
+  securitySchemes:
+    oauth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://cognitoforms.com/api-connection
+          tokenUrl: https://cognitoforms.com/admin/oauthtoken
+          scopes:
+            admin: Full administrative access

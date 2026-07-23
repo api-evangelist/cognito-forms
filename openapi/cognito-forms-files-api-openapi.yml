@@ -1,0 +1,189 @@
+openapi: 3.0.3
+info:
+  title: Cognito Forms Entries Files API
+  version: '1.1'
+  description: Cognito Forms is an online form builder for collecting and managing submission data. This API enables automated flows to trigger when entries are created, updated, or deleted and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with other services to route data, process uploaded files, and automate business workflows.
+  contact:
+    name: Cognito Forms Support
+    email: support@cognitoforms.com
+    url: https://www.cognitoforms.com/support
+servers:
+- url: https://cognitoforms.com
+  description: Cognito Forms API Server
+security:
+- oauth2Auth:
+  - admin
+tags:
+- name: Files
+paths:
+  /api/files/{id}:
+    get:
+      tags:
+      - Files
+      summary: Get File
+      description: Gets a file by id.
+      operationId: GetFile
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the file
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/FileDataRef'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/files:
+    post:
+      tags:
+      - Files
+      summary: Upload File
+      description: Uploads a file to be used in form entries.
+      operationId: UploadFile
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - File
+              properties:
+                File:
+                  type: string
+                  format: binary
+                  description: The file to upload.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      description: An error
+      type: object
+      properties:
+        Message:
+          description: A message describing the error
+          type: string
+        Type:
+          description: The type of the error
+          type: string
+        SupportCode:
+          description: A support code identifying the specific error
+          type: string
+        Data:
+          description: Data related to the error
+          type: object
+    FileDataRef:
+      description: A file reference that includes file data and metadata
+      type: object
+      properties:
+        Id:
+          description: The unique id of the file.
+          type: string
+        Name:
+          description: The name of the file
+          type: string
+        ContentType:
+          description: The content type of the file.
+          type: string
+        Size:
+          description: The size of the file.
+          type: integer
+        File:
+          description: The URL of the file.
+          type: string
+        Content:
+          description: The file content
+          type: string
+          format: byte
+    FileUploadResult:
+      description: Result of a file upload
+      type: object
+      properties:
+        Id:
+          description: The unique id of the file.
+          type: string
+        Name:
+          description: The name of the file
+          type: string
+        ContentType:
+          description: The content type of the file.
+          type: string
+        Size:
+          description: The size of the file in bytes.
+          type: integer
+  securitySchemes:
+    oauth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://cognitoforms.com/api-connection
+          tokenUrl: https://cognitoforms.com/admin/oauthtoken
+          scopes:
+            admin: Full administrative access

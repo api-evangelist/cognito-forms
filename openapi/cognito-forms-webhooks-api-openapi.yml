@@ -1,0 +1,240 @@
+openapi: 3.0.3
+info:
+  title: Cognito Forms Entries Webhooks API
+  version: '1.1'
+  description: Cognito Forms is an online form builder for collecting and managing submission data. This API enables automated flows to trigger when entries are created, updated, or deleted and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with other services to route data, process uploaded files, and automate business workflows.
+  contact:
+    name: Cognito Forms Support
+    email: support@cognitoforms.com
+    url: https://www.cognitoforms.com/support
+servers:
+- url: https://cognitoforms.com
+  description: Cognito Forms API Server
+security:
+- oauth2Auth:
+  - admin
+tags:
+- name: Webhooks
+paths:
+  /integration/oauth/subscribenewentry:
+    post:
+      tags:
+      - Webhooks
+      summary: When a new entry is created
+      description: Triggers when someone creates a new entry. Register a webhook callback URL.
+      operationId: NewEntry
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          default: forms
+      - name: publisher
+        in: query
+        description: The name of the form
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSubscription'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /integration/oauth/subscribeupdateentry:
+    post:
+      tags:
+      - Webhooks
+      summary: When an entry is updated
+      description: Triggers when someone updates an entry. Register a webhook callback URL.
+      operationId: UpdateEntry
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          default: forms
+      - name: publisher
+        in: query
+        description: The name of the form
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSubscription'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /integration/oauth/subscribeentrydeleted:
+    post:
+      tags:
+      - Webhooks
+      summary: When an entry is deleted
+      description: Triggers when someone deletes an entry. Register a webhook callback URL.
+      operationId: EntryDeleted
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          default: forms
+      - name: publisher
+        in: query
+        description: The name of the form
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSubscription'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /integration/oauth/unsubscribe:
+    delete:
+      tags:
+      - Webhooks
+      summary: Unsubscribe Webhook
+      description: Unsubscribes a webhook.
+      operationId: UnsubscribeWebhook
+      parameters:
+      - name: id
+        in: query
+        description: The unique subscription id.
+        schema:
+          type: string
+      - name: module
+        in: query
+        description: The module the subscription is associated with.
+        schema:
+          type: string
+          default: forms
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      description: An error
+      type: object
+      properties:
+        Message:
+          description: A message describing the error
+          type: string
+        Type:
+          description: The type of the error
+          type: string
+        SupportCode:
+          description: A support code identifying the specific error
+          type: string
+        Data:
+          description: Data related to the error
+          type: object
+    WebhookSubscription:
+      description: Webhook subscription payload with callback URL
+      type: object
+      required:
+      - notificationUrl
+      properties:
+        notificationUrl:
+          description: The URL to call back to.
+          type: string
+  securitySchemes:
+    oauth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://cognitoforms.com/api-connection
+          tokenUrl: https://cognitoforms.com/admin/oauthtoken
+          scopes:
+            admin: Full administrative access

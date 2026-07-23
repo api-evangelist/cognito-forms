@@ -1,0 +1,229 @@
+openapi: 3.0.3
+info:
+  title: Cognito Entries Forms API
+  version: '1.1'
+  description: Cognito Forms is an online form builder for collecting and managing submission data. This API enables automated flows to trigger when entries are created, updated, or deleted and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with other services to route data, process uploaded files, and automate business workflows.
+  contact:
+    name: Cognito Forms Support
+    email: support@cognitoforms.com
+    url: https://www.cognitoforms.com/support
+servers:
+- url: https://cognitoforms.com
+  description: Cognito Forms API Server
+security:
+- oauth2Auth:
+  - admin
+tags:
+- name: Forms
+paths:
+  /api/forms:
+    get:
+      tags:
+      - Forms
+      summary: Get Forms
+      description: Retrieves a list of forms in your organization that are accessible by the specified API key. Archived forms are not included in the response.
+      operationId: GetForms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FormReference'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/forms/{form}/schema:
+    get:
+      tags:
+      - Forms
+      summary: Get form schema
+      description: Gets the Swagger schema for a specific form.
+      operationId: GetFormSchema
+      parameters:
+      - name: form
+        in: path
+        description: The name of the form.
+        required: true
+        schema:
+          type: string
+      - name: input
+        in: query
+        description: Return input schema
+        required: false
+        schema:
+          type: boolean
+      - name: includeLinks
+        in: query
+        description: Include Links
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/forms/{form}/public-link-availability:
+    post:
+      tags:
+      - Forms
+      summary: Set form availability
+      description: Sets the availability of a form.
+      operationId: SetFormAvailability
+      parameters:
+      - name: form
+        in: path
+        description: The name of the form
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Availability settings
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormAvailabilityInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormAvailability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    FormAvailabilityInput:
+      description: Input for setting form availability
+      type: object
+      properties:
+        start:
+          description: Availability start date
+          type: string
+          format: date-time
+        end:
+          description: Availability end date
+          type: string
+          format: date-time
+        message:
+          description: Not Available Message
+          type: string
+    Error:
+      description: An error
+      type: object
+      properties:
+        Message:
+          description: A message describing the error
+          type: string
+        Type:
+          description: The type of the error
+          type: string
+        SupportCode:
+          description: A support code identifying the specific error
+          type: string
+        Data:
+          description: Data related to the error
+          type: object
+    FormAvailability:
+      description: Form availability information such as start/end availability and not available message.
+      type: object
+      properties:
+        availabilityStart:
+          description: Form availability start
+          type: string
+          format: date-time
+        availabilityEnd:
+          description: Form availability end
+          type: string
+          format: date-time
+        notAvailableMessage:
+          description: Not available message
+          type: string
+    FormReference:
+      description: A form reference that includes the name and ID of the form
+      type: object
+      properties:
+        Id:
+          description: The unique ID of the form
+          type: string
+        Name:
+          description: The name of the form
+          type: string
+  securitySchemes:
+    oauth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://cognitoforms.com/api-connection
+          tokenUrl: https://cognitoforms.com/admin/oauthtoken
+          scopes:
+            admin: Full administrative access
