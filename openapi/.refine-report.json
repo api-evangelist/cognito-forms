@@ -1,0 +1,22 @@
+{
+  "provider": "cognito-forms",
+  "sources": [
+    "cognito-forms-entries-api-openapi.yml",
+    "cognito-forms-files-api-openapi.yml",
+    "cognito-forms-forms-api-openapi.yml",
+    "cognito-forms-odata-api-openapi.yml",
+    "cognito-forms-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "cognito-forms-entries-api-openapi.yml",
+    "cognito-forms-files-api-openapi.yml",
+    "cognito-forms-forms-api-openapi.yml",
+    "cognito-forms-odata-api-openapi.yml",
+    "cognito-forms-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
