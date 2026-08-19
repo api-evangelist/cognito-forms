@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cognito Forms Entries Webhooks API",
+    "version": "1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://cognitoforms.com/api-connection",
+      "accessTokenUrl": "https://cognitoforms.com/admin/oauthtoken",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "When a new entry is created",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cognitoforms.com/integration/oauth/subscribenewentry",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "publisher",
+                "value": "",
+                "type": "query",
+                "description": "The name of the form"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers when someone creates a new entry. Register a webhook callback URL."
+        },
+        {
+          "info": {
+            "name": "When an entry is updated",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cognitoforms.com/integration/oauth/subscribeupdateentry",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "publisher",
+                "value": "",
+                "type": "query",
+                "description": "The name of the form"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers when someone updates an entry. Register a webhook callback URL."
+        },
+        {
+          "info": {
+            "name": "When an entry is deleted",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cognitoforms.com/integration/oauth/subscribeentrydeleted",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "publisher",
+                "value": "",
+                "type": "query",
+                "description": "The name of the form"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers when someone deletes an entry. Register a webhook callback URL."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cognitoforms.com/integration/oauth/unsubscribe",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique subscription id."
+              },
+              {
+                "name": "module",
+                "value": "",
+                "type": "query",
+                "description": "The module the subscription is associated with."
+              }
+            ]
+          },
+          "docs": "Unsubscribes a webhook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

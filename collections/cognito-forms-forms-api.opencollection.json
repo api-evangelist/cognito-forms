@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cognito Entries Forms API",
+    "version": "1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://cognitoforms.com/api-connection",
+      "accessTokenUrl": "https://cognitoforms.com/admin/oauthtoken",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cognitoforms.com/api/forms"
+          },
+          "docs": "Retrieves a list of forms in your organization that are accessible by the specified API key. Archived forms are not included in the response."
+        },
+        {
+          "info": {
+            "name": "Get form schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cognitoforms.com/api/forms/:form/schema",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form."
+              },
+              {
+                "name": "input",
+                "value": "",
+                "type": "query",
+                "description": "Return input schema"
+              },
+              {
+                "name": "includeLinks",
+                "value": "",
+                "type": "query",
+                "description": "Include Links"
+              }
+            ]
+          },
+          "docs": "Gets the Swagger schema for a specific form."
+        },
+        {
+          "info": {
+            "name": "Set form availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cognitoforms.com/api/forms/:form/public-link-availability",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the availability of a form."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cognito Forms Entries API",
+    "version": "1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://cognitoforms.com/api-connection",
+      "accessTokenUrl": "https://cognitoforms.com/admin/oauthtoken",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cognitoforms.com/api/forms/:form/entries",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new entry."
+        },
+        {
+          "info": {
+            "name": "Get entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cognitoforms.com/api/forms/:form/entries/:entryId",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              },
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path",
+                "description": "The entry id"
+              }
+            ]
+          },
+          "docs": "Gets an entry."
+        },
+        {
+          "info": {
+            "name": "Update entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://cognitoforms.com/api/forms/:form/entries/:entryId",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              },
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path",
+                "description": "The entry id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an entry."
+        },
+        {
+          "info": {
+            "name": "Delete entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cognitoforms.com/api/forms/:form/entries/:entryId",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              },
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path",
+                "description": "The entry id"
+              }
+            ]
+          },
+          "docs": "Delete an entry."
+        },
+        {
+          "info": {
+            "name": "Get Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cognitoforms.com/api/forms/:form/entries/:entry/documents/:templateNumber",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              },
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entry id"
+              },
+              {
+                "name": "templateNumber",
+                "value": "",
+                "type": "path",
+                "description": "The template number"
+              }
+            ]
+          },
+          "docs": "Gets a document generated from a form entry."
+        },
+        {
+          "info": {
+            "name": "Import Entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cognitoforms.com/api/forms/:form/import-entries",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "File",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "ImportMode",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Email",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "MatchEntriesUsing",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates, updates, or deletes entries using provided file content."
+        },
+        {
+          "info": {
+            "name": "Get Import Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cognitoforms.com/api/forms/:form/import-status/:importId",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              },
+              {
+                "name": "importId",
+                "value": "",
+                "type": "path",
+                "description": "The Import ID"
+              }
+            ]
+          },
+          "docs": "Gets the current status of an import and returns the number of successful and unsuccessful entries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

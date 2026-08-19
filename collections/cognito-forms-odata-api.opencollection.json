@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cognito Forms Entries OData API",
+    "version": "1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://cognitoforms.com/api-connection",
+      "accessTokenUrl": "https://cognitoforms.com/admin/oauthtoken",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OData",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Form Entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cognitoforms.com/api/odata/Forms(:form)/Views(:viewId)/Entries",
+            "params": [
+              {
+                "name": "form",
+                "value": "",
+                "type": "path",
+                "description": "The name of the form"
+              },
+              {
+                "name": "viewId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the view"
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Include total count of entries"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Returns list of entry IDs in a View when $select=Id is specified"
+              }
+            ]
+          },
+          "docs": "Get all of the entries for a specified view using OData."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
