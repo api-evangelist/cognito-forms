@@ -28,6 +28,13 @@ tags:
   - Forms
   - Form Builder
   - Form Entries
+  - Workflow-Automation
+  - Data Collection
+  - OData
+tags_raw:
+  - Forms
+  - Form Builder
+  - Form Entries
   - Workflow Automation
   - Data Collection
   - OData
@@ -53,6 +60,8 @@ apis:
   humanURL: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
   baseURL: https://www.cognitoforms.com/api
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -98,6 +107,8 @@ apis:
   humanURL: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
   baseURL: https://www.cognitoforms.com/api
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
