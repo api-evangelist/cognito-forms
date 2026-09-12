@@ -2,23 +2,18 @@
   "repo": "cognito-forms",
   "feeds": [
     {
+      "source": "https://www.linkedin.com/company/cognito-forms",
+      "error": "HTTPError"
+    },
+    {
       "source": "https://www.cognitoforms.com/blog/rss",
       "feed_url": "https://www.cognitoforms.com/blog/rss",
       "title": "",
       "saved": 0,
-      "method": "feed",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
-    },
-    {
-      "source": "https://www.linkedin.com/company/cognito-forms",
-      "feed_url": "https://www.linkedin.com/company/cognito-forms",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "method": "feed"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 54,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
