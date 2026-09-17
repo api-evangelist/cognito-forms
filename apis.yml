@@ -63,7 +63,8 @@ apis:
   - type: Documentation
     url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
   - type: APIReference
-    url: https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
+    url: >-
+      https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
 - aid: cognito-forms:cognito-forms-files-api
   name: Cognito Forms Files API
   description: The Files API from Cognito Forms — 2 operation(s) for files.
@@ -79,7 +80,8 @@ apis:
   - type: Documentation
     url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
   - type: APIReference
-    url: https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
+    url: >-
+      https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
 - aid: cognito-forms:cognito-forms-forms-api
   name: Cognito Forms API
   description: The Forms API from Cognito Forms — 3 operation(s) for forms.
@@ -93,21 +95,8 @@ apis:
   - type: Documentation
     url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
   - type: APIReference
-    url: https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
-- aid: cognito-forms:cognito-forms-odata-api
-  name: Cognito Forms OData API
-  description: The OData API from Cognito Forms — 1 operation(s) for odata.
-  humanURL: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
-  baseURL: https://www.cognitoforms.com/api
-  tags:
-  - OData
-  properties:
-  - type: OpenAPI
-    url: openapi/cognito-forms-odata-api-openapi.yml
-  - type: Documentation
-    url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
-  - type: APIReference
-    url: https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
+    url: >-
+      https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
 - aid: cognito-forms:cognito-forms-webhooks-api
   name: Cognito Forms Webhooks API
   description: The Webhooks API from Cognito Forms — 4 operation(s) for webhooks.
@@ -123,7 +112,23 @@ apis:
   - type: Documentation
     url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
   - type: APIReference
-    url: https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
+    url: >-
+      https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
+- aid: cognito-forms:cognito-forms-odata-api
+  name: Cognito Forms O Data API
+  description: The OData API from Cognito Forms — 1 operation(s) for odata.
+  humanURL: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
+  baseURL: https://www.cognitoforms.com/api
+  tags:
+  - OData
+  properties:
+  - type: OpenAPI
+    url: openapi/cognito-forms-odata-api-openapi.yml
+  - type: Documentation
+    url: https://www.cognitoforms.com/support/475/data-integration/cognito-forms-api
+  - type: APIReference
+    url: >-
+      https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
 common:
 - type: AgenticAccess
   url: agentic-access/cognito-forms-agentic-access.yml
