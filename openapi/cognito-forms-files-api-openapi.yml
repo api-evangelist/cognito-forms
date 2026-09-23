@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Cognito Forms Entries Files API
+  title: Cognito Forms Files API
   version: '1.1'
   description: Cognito Forms is an online form builder for collecting and managing submission data. This API enables automated flows to trigger when entries are created, updated, or deleted and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with other services to route data, process uploaded files, and automate business workflows.
   contact:
@@ -92,26 +92,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     InternalServerError:
       description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
       content:
         application/json:
           schema:
@@ -122,7 +104,41 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    FileUploadResult:
+      description: Result of a file upload
+      type: object
+      properties:
+        Id:
+          description: The unique id of the file.
+          type: string
+        Name:
+          description: The name of the file
+          type: string
+        ContentType:
+          description: The content type of the file.
+          type: string
+        Size:
+          description: The size of the file in bytes.
+          type: integer
     Error:
       description: An error
       type: object
@@ -162,22 +178,6 @@ components:
           description: The file content
           type: string
           format: byte
-    FileUploadResult:
-      description: Result of a file upload
-      type: object
-      properties:
-        Id:
-          description: The unique id of the file.
-          type: string
-        Name:
-          description: The name of the file
-          type: string
-        ContentType:
-          description: The content type of the file.
-          type: string
-        Size:
-          description: The size of the file in bytes.
-          type: integer
   securitySchemes:
     oauth2Auth:
       type: oauth2

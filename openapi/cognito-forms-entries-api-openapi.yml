@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Cognito Forms Entries API
   version: '1.1'
@@ -319,26 +319,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     InternalServerError:
       description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
       content:
         application/json:
           schema:
@@ -349,13 +331,44 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Too Many Requests
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    ImportResult:
+      description: The result of an import request
+      type: object
+      properties:
+        Id:
+          description: The ID of the import
+          type: string
+        Status:
+          description: The status of the import
+          type: string
+        ErrorMessage:
+          description: A message describing why the import failed
+          type: string
     ImportStatus:
       description: The status of an import
       type: object
@@ -420,19 +433,6 @@ components:
           description: The file content
           type: string
           format: byte
-    ImportResult:
-      description: The result of an import request
-      type: object
-      properties:
-        Id:
-          description: The ID of the import
-          type: string
-        Status:
-          description: The status of the import
-          type: string
-        ErrorMessage:
-          description: A message describing why the import failed
-          type: string
   securitySchemes:
     oauth2Auth:
       type: oauth2

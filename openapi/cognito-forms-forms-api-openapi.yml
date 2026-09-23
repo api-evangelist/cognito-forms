@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Cognito Entries Forms API
+  title: Cognito Forms API
   version: '1.1'
   description: Cognito Forms is an online form builder for collecting and managing submission data. This API enables automated flows to trigger when entries are created, updated, or deleted and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with other services to route data, process uploaded files, and automate business workflows.
   contact:
@@ -125,26 +125,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
       content:
         application/json:
           schema:
@@ -155,13 +137,46 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Too Many Requests
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    FormAvailability:
+      description: Form availability information such as start/end availability and not available message.
+      type: object
+      properties:
+        availabilityStart:
+          description: Form availability start
+          type: string
+          format: date-time
+        availabilityEnd:
+          description: Form availability end
+          type: string
+          format: date-time
+        notAvailableMessage:
+          description: Not available message
+          type: string
     FormAvailabilityInput:
       description: Input for setting form availability
       type: object
@@ -176,6 +191,16 @@ components:
           format: date-time
         message:
           description: Not Available Message
+          type: string
+    FormReference:
+      description: A form reference that includes the name and ID of the form
+      type: object
+      properties:
+        Id:
+          description: The unique ID of the form
+          type: string
+        Name:
+          description: The name of the form
           type: string
     Error:
       description: An error
@@ -193,31 +218,6 @@ components:
         Data:
           description: Data related to the error
           type: object
-    FormAvailability:
-      description: Form availability information such as start/end availability and not available message.
-      type: object
-      properties:
-        availabilityStart:
-          description: Form availability start
-          type: string
-          format: date-time
-        availabilityEnd:
-          description: Form availability end
-          type: string
-          format: date-time
-        notAvailableMessage:
-          description: Not available message
-          type: string
-    FormReference:
-      description: A form reference that includes the name and ID of the form
-      type: object
-      properties:
-        Id:
-          description: The unique ID of the form
-          type: string
-        Name:
-          description: The name of the form
-          type: string
   securitySchemes:
     oauth2Auth:
       type: oauth2

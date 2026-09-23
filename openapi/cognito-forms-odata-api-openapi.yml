@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Cognito Forms Entries OData API
+  title: Cognito Forms O Data API
   version: '1.1'
   description: Cognito Forms is an online form builder for collecting and managing submission data. This API enables automated flows to trigger when entries are created, updated, or deleted and provides actions to create, update, and retrieve entries. Integrate Cognito Forms with other services to route data, process uploaded files, and automate business workflows.
   contact:
@@ -67,20 +67,14 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     InternalServerError:
       description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
@@ -91,8 +85,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
       content:
         application/json:
           schema:
