@@ -39,7 +39,7 @@ tags:
 - Forms
 - Form Builder
 - Form Entries
-- Workflow-Automation
+- Workflow Automation
 - Data Collection
 - OData
 tags_raw:
@@ -49,6 +49,7 @@ tags_raw:
 - Workflow Automation
 - Data Collection
 - OData
+- Workflow-Automation
 apis:
 - aid: cognito-forms:cognito-forms-entries-api
   name: Cognito Forms Entries API

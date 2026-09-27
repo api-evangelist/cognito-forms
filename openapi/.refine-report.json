@@ -10,9 +10,7 @@
     "cognito-forms-odata-api-openapi.yml",
     "cognito-forms-webhooks-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -23,14 +21,13 @@
     "cognito-forms-openapi.yml: declared missing tag: Forms",
     "cognito-forms-openapi.yml: declared missing tag: OData",
     "cognito-forms-openapi.yml: declared missing tag: Webhooks",
-    "superseded outputs removed: cognito-forms-o-data-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 5 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "cognito-forms-entries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cognito-forms-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cognito-forms-forms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "cognito-forms-o-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognito-forms-odata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cognito-forms-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

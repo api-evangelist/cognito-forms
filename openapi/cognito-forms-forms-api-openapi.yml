@@ -124,84 +124,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    FormAvailability:
-      description: Form availability information such as start/end availability and not available message.
-      type: object
-      properties:
-        availabilityStart:
-          description: Form availability start
-          type: string
-          format: date-time
-        availabilityEnd:
-          description: Form availability end
-          type: string
-          format: date-time
-        notAvailableMessage:
-          description: Not available message
-          type: string
-    FormAvailabilityInput:
-      description: Input for setting form availability
-      type: object
-      properties:
-        start:
-          description: Availability start date
-          type: string
-          format: date-time
-        end:
-          description: Availability end date
-          type: string
-          format: date-time
-        message:
-          description: Not Available Message
-          type: string
-    FormReference:
-      description: A form reference that includes the name and ID of the form
-      type: object
-      properties:
-        Id:
-          description: The unique ID of the form
-          type: string
-        Name:
-          description: The name of the form
-          type: string
     Error:
       description: An error
       type: object
@@ -218,6 +141,83 @@ components:
         Data:
           description: Data related to the error
           type: object
+    FormReference:
+      description: A form reference that includes the name and ID of the form
+      type: object
+      properties:
+        Id:
+          description: The unique ID of the form
+          type: string
+        Name:
+          description: The name of the form
+          type: string
+    FormAvailabilityInput:
+      description: Input for setting form availability
+      type: object
+      properties:
+        start:
+          description: Availability start date
+          type: string
+          format: date-time
+        end:
+          description: Availability end date
+          type: string
+          format: date-time
+        message:
+          description: Not Available Message
+          type: string
+    FormAvailability:
+      description: Form availability information such as start/end availability and not available message.
+      type: object
+      properties:
+        availabilityStart:
+          description: Form availability start
+          type: string
+          format: date-time
+        availabilityEnd:
+          description: Form availability end
+          type: string
+          format: date-time
+        notAvailableMessage:
+          description: Not available message
+          type: string
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2Auth:
       type: oauth2

@@ -318,82 +318,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ImportResult:
-      description: The result of an import request
-      type: object
-      properties:
-        Id:
-          description: The ID of the import
-          type: string
-        Status:
-          description: The status of the import
-          type: string
-        ErrorMessage:
-          description: A message describing why the import failed
-          type: string
-    ImportStatus:
-      description: The status of an import
-      type: object
-      properties:
-        Id:
-          description: The ID of the import
-          type: string
-        Status:
-          description: The status of the import
-          type: string
-        ErrorMessage:
-          description: A message describing why the import failed
-          type: string
-        SuccessfulEntries:
-          description: The number of entries successfully imported
-          type: integer
-        UnsuccessfulEntries:
-          description: The number of entries that failed to import
-          type: integer
-        TotalEntries:
-          description: The total number of entries in the import
-          type: integer
-        ImportLink:
-          description: The link to the entries page to download the annotated file
-          type: string
     Error:
       description: An error
       type: object
@@ -433,6 +358,81 @@ components:
           description: The file content
           type: string
           format: byte
+    ImportStatus:
+      description: The status of an import
+      type: object
+      properties:
+        Id:
+          description: The ID of the import
+          type: string
+        Status:
+          description: The status of the import
+          type: string
+        ErrorMessage:
+          description: A message describing why the import failed
+          type: string
+        SuccessfulEntries:
+          description: The number of entries successfully imported
+          type: integer
+        UnsuccessfulEntries:
+          description: The number of entries that failed to import
+          type: integer
+        TotalEntries:
+          description: The total number of entries in the import
+          type: integer
+        ImportLink:
+          description: The link to the entries page to download the annotated file
+          type: string
+    ImportResult:
+      description: The result of an import request
+      type: object
+      properties:
+        Id:
+          description: The ID of the import
+          type: string
+        Status:
+          description: The status of the import
+          type: string
+        ErrorMessage:
+          description: A message describing why the import failed
+          type: string
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2Auth:
       type: oauth2
