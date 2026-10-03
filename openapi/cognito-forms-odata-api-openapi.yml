@@ -66,24 +66,13 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  schemas:
-    Error:
-      description: An error
-      type: object
-      properties:
-        Message:
-          description: A message describing the error
-          type: string
-        Type:
-          description: The type of the error
-          type: string
-        SupportCode:
-          description: A support code identifying the specific error
-          type: string
-        Data:
-          description: Data related to the error
-          type: object
   responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad Request
       content:
@@ -102,18 +91,29 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      description: An error
+      type: object
+      properties:
+        Message:
+          description: A message describing the error
+          type: string
+        Type:
+          description: The type of the error
+          type: string
+        SupportCode:
+          description: A support code identifying the specific error
+          type: string
+        Data:
+          description: Data related to the error
+          type: object
   securitySchemes:
     oauth2Auth:
       type: oauth2

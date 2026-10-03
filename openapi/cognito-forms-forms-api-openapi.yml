@@ -124,6 +124,43 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       description: An error
@@ -141,6 +178,21 @@ components:
         Data:
           description: Data related to the error
           type: object
+    FormAvailability:
+      description: Form availability information such as start/end availability and not available message.
+      type: object
+      properties:
+        availabilityStart:
+          description: Form availability start
+          type: string
+          format: date-time
+        availabilityEnd:
+          description: Form availability end
+          type: string
+          format: date-time
+        notAvailableMessage:
+          description: Not available message
+          type: string
     FormReference:
       description: A form reference that includes the name and ID of the form
       type: object
@@ -166,58 +218,6 @@ components:
         message:
           description: Not Available Message
           type: string
-    FormAvailability:
-      description: Form availability information such as start/end availability and not available message.
-      type: object
-      properties:
-        availabilityStart:
-          description: Form availability start
-          type: string
-          format: date-time
-        availabilityEnd:
-          description: Form availability end
-          type: string
-          format: date-time
-        notAvailableMessage:
-          description: Not available message
-          type: string
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2Auth:
       type: oauth2

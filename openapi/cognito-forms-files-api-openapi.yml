@@ -92,6 +92,29 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    FileDataRef:
+      description: A file reference that includes file data and metadata
+      type: object
+      properties:
+        Id:
+          description: The unique id of the file.
+          type: string
+        Name:
+          description: The name of the file
+          type: string
+        ContentType:
+          description: The content type of the file.
+          type: string
+        Size:
+          description: The size of the file.
+          type: integer
+        File:
+          description: The URL of the file.
+          type: string
+        Content:
+          description: The file content
+          type: string
+          format: byte
     Error:
       description: An error
       type: object
@@ -124,30 +147,13 @@ components:
         Size:
           description: The size of the file in bytes.
           type: integer
-    FileDataRef:
-      description: A file reference that includes file data and metadata
-      type: object
-      properties:
-        Id:
-          description: The unique id of the file.
-          type: string
-        Name:
-          description: The name of the file
-          type: string
-        ContentType:
-          description: The content type of the file.
-          type: string
-        Size:
-          description: The size of the file.
-          type: integer
-        File:
-          description: The URL of the file.
-          type: string
-        Content:
-          description: The file content
-          type: string
-          format: byte
   responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad Request
       content:
@@ -162,12 +168,6 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: Internal Server Error
       content:
         application/json:
           schema:

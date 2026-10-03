@@ -172,6 +172,37 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       description: An error
@@ -198,37 +229,6 @@ components:
         notificationUrl:
           description: The URL to call back to.
           type: string
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2Auth:
       type: oauth2
