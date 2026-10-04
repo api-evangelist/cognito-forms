@@ -125,14 +125,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request
+    NotFound:
+      description: Not Found
       content:
         application/json:
           schema:
@@ -143,20 +137,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests
+    InternalServerError:
+      description: Internal Server Error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests
       content:
         application/json:
           schema:
@@ -178,6 +178,21 @@ components:
         Data:
           description: Data related to the error
           type: object
+    FormAvailabilityInput:
+      description: Input for setting form availability
+      type: object
+      properties:
+        start:
+          description: Availability start date
+          type: string
+          format: date-time
+        end:
+          description: Availability end date
+          type: string
+          format: date-time
+        message:
+          description: Not Available Message
+          type: string
     FormAvailability:
       description: Form availability information such as start/end availability and not available message.
       type: object
@@ -202,21 +217,6 @@ components:
           type: string
         Name:
           description: The name of the form
-          type: string
-    FormAvailabilityInput:
-      description: Input for setting form availability
-      type: object
-      properties:
-        start:
-          description: Availability start date
-          type: string
-          format: date-time
-        end:
-          description: Availability end date
-          type: string
-          format: date-time
-        message:
-          description: Not Available Message
           type: string
   securitySchemes:
     oauth2Auth:

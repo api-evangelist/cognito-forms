@@ -91,30 +91,38 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    FileDataRef:
-      description: A file reference that includes file data and metadata
-      type: object
-      properties:
-        Id:
-          description: The unique id of the file.
-          type: string
-        Name:
-          description: The name of the file
-          type: string
-        ContentType:
-          description: The content type of the file.
-          type: string
-        Size:
-          description: The size of the file.
-          type: integer
-        File:
-          description: The URL of the file.
-          type: string
-        Content:
-          description: The file content
-          type: string
-          format: byte
     Error:
       description: An error
       type: object
@@ -147,37 +155,29 @@ components:
         Size:
           description: The size of the file in bytes.
           type: integer
-  responses:
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    FileDataRef:
+      description: A file reference that includes file data and metadata
+      type: object
+      properties:
+        Id:
+          description: The unique id of the file.
+          type: string
+        Name:
+          description: The name of the file
+          type: string
+        ContentType:
+          description: The content type of the file.
+          type: string
+        Size:
+          description: The size of the file.
+          type: integer
+        File:
+          description: The URL of the file.
+          type: string
+        Content:
+          description: The file content
+          type: string
+          format: byte
   securitySchemes:
     oauth2Auth:
       type: oauth2
