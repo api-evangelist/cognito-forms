@@ -131,6 +131,9 @@ apis:
     url: >-
       https://www.cognitoforms.com/support/476/data-integration/cognito-forms-api/rest-api-reference
 common:
+- type: CapabilityMap
+  url: capabilities/cognito-forms-capability-edges.yml
+  name: Cognito Forms Business Capability Map
 - type: AgenticAccess
   url: agentic-access/cognito-forms-agentic-access.yml
 - type: DomainSecurity
